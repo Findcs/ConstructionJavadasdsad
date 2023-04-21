@@ -4,7 +4,7 @@ public class Authorizator {
     {}
     public void authorizate(String username, String passwd)
     {
-        DB db = new SQL("db.sqlite");
+        DB db = new SQL();
         User user = db.search(username);
         if (user.getPassword() == passwd)
         {
