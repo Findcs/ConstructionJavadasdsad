@@ -7,6 +7,6 @@ import ru.anton.test2.models.Item;
 
 import java.util.Optional;
 public interface ItemRepository extends JpaRepository<Item, Integer> {
-    Optional<Company> findById(int item_id);
-    Optional<Company> findByName(String name);
+    Optional<Item> findById(int item_id);
+    Optional<Item> findByName(String name);
 }
