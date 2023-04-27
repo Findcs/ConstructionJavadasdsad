@@ -1,18 +1,27 @@
 package ru.anton.test2.models;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table
 public class Description {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
-    @JoinColumn(name = "item_id")
-    private Item item;
+    private int item_id;
     private String name_descr;
     private String descr_value;
+
+    @Override
+    public String toString() {
+        return "Description{" +
+                "id=" + id +
+                ", item_id=" + item_id +
+                ", name_descr='" + name_descr + '\'' +
+                ", descr_value='" + descr_value + '\'' +
+                '}';
+    }
+
+    public Description(int id, int item_id, String name_descr, String descr_value) {
+        this.id = id;
+        this.item_id = item_id;
+        this.name_descr = name_descr;
+        this.descr_value = descr_value;
+    }
 
     public int getId() {
         return id;
@@ -22,12 +31,12 @@ public class Description {
         this.id = id;
     }
 
-    public Item getItem() {
-        return item;
+    public int getItem_id() {
+        return item_id;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setItem_id(int item_id) {
+        this.item_id = item_id;
     }
 
     public String getName_descr() {
