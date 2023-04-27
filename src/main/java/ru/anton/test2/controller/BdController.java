@@ -1,16 +1,12 @@
-package ru.anton.test2.Controller;
+package ru.anton.test2.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.anton.test2.Facade.SQL;
-import ru.anton.test2.Facade.User;
-import ru.anton.test2.Facade.TestConn;
-import ru.anton.test2.Models.Company;
+import ru.anton.test2.facade.SQL;
+import ru.anton.test2.models.Company;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

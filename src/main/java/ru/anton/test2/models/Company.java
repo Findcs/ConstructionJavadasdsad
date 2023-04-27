@@ -1,4 +1,4 @@
-package ru.anton.test2.Models;
+package ru.anton.test2.models;
 
 public class Company {
     private int company_id;

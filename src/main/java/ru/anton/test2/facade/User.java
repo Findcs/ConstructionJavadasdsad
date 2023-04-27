@@ -1,4 +1,4 @@
-package ru.anton.test2.Facade;
+package ru.anton.test2.facade;
 
 public class User {
     private String firstName;

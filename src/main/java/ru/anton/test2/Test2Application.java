@@ -2,8 +2,7 @@ package ru.anton.test2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ru.anton.test2.Facade.SQL;
-import ru.anton.test2.Facade.TestConn;
+import ru.anton.test2.facade.SQL;
 
 @SpringBootApplication
 public class Test2Application {
