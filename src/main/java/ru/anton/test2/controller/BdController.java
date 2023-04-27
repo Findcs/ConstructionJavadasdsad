@@ -48,7 +48,12 @@ public class BdController {
 
     @GetMapping("/adduser")
     public ResponseEntity<?> add_user(@RequestParam String login,@RequestParam String password, @RequestParam String token) throws SQLException {
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        User user = new User();
+        user.setEmail(login);
+        user.setPassword(password);
+        if (userRepository.findByEmail(login).isEmpty()){
+        userRepository.save(user);
+        return new ResponseEntity<>(HttpStatus.OK);}
+        else return  new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 }
