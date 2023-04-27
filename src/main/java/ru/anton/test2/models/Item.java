@@ -1,4 +1,4 @@
-package ru.anton.test2.Models;
+package ru.anton.test2.models;
 
 import java.util.ArrayList;
 import java.util.List;

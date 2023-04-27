@@ -1,9 +1,6 @@
-package ru.anton.test2.Facade;
-
-import java.sql.ResultSet;
+package ru.anton.test2.facade;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.Statement;
 

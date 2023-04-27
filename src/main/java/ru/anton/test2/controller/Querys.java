@@ -1,6 +1,6 @@
-package ru.anton.test2.Controller;
+package ru.anton.test2.controller;
 
-import ru.anton.test2.Facade.SQL;
+import ru.anton.test2.facade.SQL;
 
 import java.sql.Connection;
 

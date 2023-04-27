@@ -1,4 +1,4 @@
-package ru.anton.test2.Models;
+package ru.anton.test2.models;
 
 public class Description {
     private int id;
