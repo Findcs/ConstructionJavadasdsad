@@ -3,7 +3,7 @@ package ru.anton.test2.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users_new")
+@Table(name = "users")
 public class User {
 
     @Id

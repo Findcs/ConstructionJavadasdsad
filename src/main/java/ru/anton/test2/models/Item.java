@@ -1,35 +1,27 @@
 package ru.anton.test2.models;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "items")
 public class Item {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int item_id;
+
     private String name;
-    private int id;
 
-    private int user_id;
 
-    private int company_id;
+    @ManyToOne()
+    @JoinColumn(name = "company_id")
+    private Company company_id;
     private List<Description> descriptions;
 
 
-    static public List<Item> init() {
-
-        List<Description> descriptions1 = new ArrayList<>();
-        descriptions1.add(new Description(1, 1, "asd", "dasds"));
-        List<Item> items = new ArrayList<>();
-
-        items.add(new Item("Телефон,", 1, 1, 2, descriptions1));
-        items.add(new Item("csdsdsds,", 2, 2, 3, descriptions1));
-        return items;
-    }
-
-    public Item(String name, int id, int userId, int companyId, List<Description> descriptions) {
-        this.name = name;
-        this.id = id;
-        user_id = userId;
-        company_id = companyId;
-        this.descriptions = descriptions;
+    public Item() {
     }
 
     public String getName() {
@@ -41,11 +33,11 @@ public class Item {
     }
 
     public int getId() {
-        return id;
+        return item_id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.item_id = id;
     }
 
     public List<Description> getDescriptions() {
@@ -60,7 +52,7 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "name='" + name + '\'' +
-                ", id=" + id +
+                ", id=" + item_id +
                 ", descriptions=" + descriptions +
                 '}';
     }
