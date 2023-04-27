@@ -7,9 +7,8 @@ import ru.anton.test2.facade.SQL;
 @SpringBootApplication
 public class Test2Application {
 
-	public static void main(String[] args) throws ClassNotFoundException {
+	public static void main(String[] args) {
 		SpringApplication.run(Test2Application.class, args);
-		SQL.openConnection();
 	}
 
 }
