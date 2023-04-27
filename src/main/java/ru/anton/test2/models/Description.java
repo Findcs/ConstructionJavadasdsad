@@ -11,6 +11,11 @@ public class Description {
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private String name_descr;
     private String descr_value;
 
@@ -28,6 +33,14 @@ public class Description {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName_descr() {

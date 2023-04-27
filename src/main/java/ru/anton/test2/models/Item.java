@@ -15,13 +15,31 @@ public class Item {
     private String name;
 
 
+
     @ManyToOne()
     @JoinColumn(name = "company_id")
     private Company company_id;
+
+    @OneToMany(mappedBy = "item")
     private List<Description> descriptions;
 
 
     public Item() {
+    }
+    public int getItem_id() {
+        return item_id;
+    }
+
+    public void setItem_id(int item_id) {
+        this.item_id = item_id;
+    }
+
+    public Company getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(Company company_id) {
+        this.company_id = company_id;
     }
 
     public String getName() {
@@ -32,13 +50,6 @@ public class Item {
         this.name = name;
     }
 
-    public int getId() {
-        return item_id;
-    }
-
-    public void setId(int id) {
-        this.item_id = id;
-    }
 
     public List<Description> getDescriptions() {
         return descriptions;

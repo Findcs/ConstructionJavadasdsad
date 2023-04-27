@@ -8,6 +8,8 @@ import java.util.List;
 @Entity
 @Table(name = "companys")
 public class Company {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int company_id;
@@ -36,5 +38,15 @@ public class Company {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public Company() {
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }
