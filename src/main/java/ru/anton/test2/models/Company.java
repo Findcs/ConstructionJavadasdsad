@@ -1,9 +1,21 @@
 package ru.anton.test2.models;
 
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "companys")
 public class Company {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int company_id;
 
     private String name;
+
+    @OneToMany(mappedBy = "company_id")
+    private List<Item> items;
 
     public Company(int id,String name) {
         company_id = id;
