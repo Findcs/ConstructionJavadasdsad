@@ -49,4 +49,17 @@ public class BdController {
         }
         return companys;
     }
+
+    @GetMapping("/adduser")
+    public ResponseEntity<?> add_user(@RequestParam String login,@RequestParam String password, @RequestParam String token) throws SQLException {
+        SQL.statement.execute("SELECT * FROM constr.companys WHERE user_login ='"+ login+"'");
+        ResultSet resultSet = SQL.statement.getResultSet();
+        if (resultSet.next()){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+        String query = "INSERT INTO constr.companys (name) VALUES('"+name+"')";
+        SQL.statement.execute(query);
+        SQL.connection.commit();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
