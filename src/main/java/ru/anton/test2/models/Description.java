@@ -10,7 +10,7 @@ public class Description {
     private int id;
     @ManyToOne
     @JoinColumn(name = "item_id")
-    private Item item2;
+    private Item item;
     private String name_descr;
     private String descr_value;
 
