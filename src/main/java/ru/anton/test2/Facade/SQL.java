@@ -12,8 +12,8 @@ public class SQL implements DB {
     private static String PASSWORD = "roots";
     private static String URL = "jdbc:mysql://localhost:3306/mysql";
 
-    static Statement statement;
-    static Connection connection;
+    public static Statement statement;
+    public static Connection connection;
     public SQL() {
     }
 
@@ -22,10 +22,12 @@ public class SQL implements DB {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             connection=DriverManager.getConnection(URL,USER_NAME,PASSWORD);
+            connection.setAutoCommit(false);
             if (connection != null) { System.out.println("Successfully connected to MySQL database test"); }
+            connection.setAutoCommit(false);
             statement = connection.createStatement();
-            boolean resultSet= statement.execute("INSERT INTO constr.companys (name) VALUES('Samsung')");
-            System.out.println(resultSet);
+            /*boolean resultSet= statement.execute("INSERT INTO constr.companys (name) VALUES('Xiaomi')");
+            System.out.println(resultSet);*/
 
         }
         catch(Exception e){ System.out.println(e);}

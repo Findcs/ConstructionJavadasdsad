@@ -1,4 +1,4 @@
-package ru.anton.test2.Memento;
+package ru.anton.test2.Models;
 
 public class Description {
     private int id;
