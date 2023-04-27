@@ -18,10 +18,16 @@ public class Item {
     @ManyToOne()
     @JoinColumn(name = "company_id")
     private Company company_id;
+
+    @OneToMany(mappedBy = "item")
     private List<Description> descriptions;
 
+    public int getItem_id() {
+        return item_id;
+    }
 
-    public Item() {
+    public void setItem_id(int item_id) {
+        this.item_id = item_id;
     }
 
     public String getName() {
@@ -32,12 +38,12 @@ public class Item {
         this.name = name;
     }
 
-    public int getId() {
-        return item_id;
+    public Company getCompany_id() {
+        return company_id;
     }
 
-    public void setId(int id) {
-        this.item_id = id;
+    public void setCompany_id(Company company_id) {
+        this.company_id = company_id;
     }
 
     public List<Description> getDescriptions() {
@@ -46,14 +52,5 @@ public class Item {
 
     public void setDescriptions(List<Description> descriptions) {
         this.descriptions = descriptions;
-    }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "name='" + name + '\'' +
-                ", id=" + item_id +
-                ", descriptions=" + descriptions +
-                '}';
     }
 }
