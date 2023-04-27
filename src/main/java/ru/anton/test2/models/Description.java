@@ -1,5 +1,10 @@
 package ru.anton.test2.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class Description {
     private int id;
     private int item_id;
