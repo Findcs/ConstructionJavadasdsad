@@ -13,9 +13,8 @@ public class Memento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int memento_id;
 
-    @OneToOne()
+    @OneToOne(mappedBy = "memento_id")
     @JsonIgnore
-    @JoinColumn(name = "memento_id")
     private Description description;
 
     @OneToMany(mappedBy = "id")
