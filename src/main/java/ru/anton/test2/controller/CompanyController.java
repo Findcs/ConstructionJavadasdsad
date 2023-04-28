@@ -1,5 +1,7 @@
+
 package ru.anton.test2.controller;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,18 +20,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class BdController {
-    @Autowired
-    UserRepository userRepository;
-
+public class CompanyController {
     @Autowired
     CompanyRepository companyRepository;
 
-    @Autowired
-    ItemRepository itemRepository;
     @GetMapping("/addcomp")
     public ResponseEntity<?> add_company(@RequestParam String name) throws SQLException {
         Company company = new Company();
@@ -42,36 +39,9 @@ public class BdController {
     }
 
     @GetMapping("/all_comp")
-    public List<Company> all_company()
+    public ResponseEntity<?> all_company()
     {
         List<Company> companys = companyRepository.findAll();
-        return companys;
+        return new ResponseEntity<>(companys,HttpStatus.OK);
     }
-
-
-    @GetMapping("/adduser")
-    public ResponseEntity<?> add_user(@RequestParam String login,@RequestParam String password, @RequestParam String token) throws SQLException {
-        User user = new User();
-        user.setEmail(login);
-        user.setPassword(password);
-        user.setRole(0);
-        if (userRepository.findByEmail(login).isEmpty()){
-        userRepository.save(user);
-        return new ResponseEntity<>(HttpStatus.OK);}
-        else return  new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-    }
-    //http://localhost:8080/adduser?login=asm&password=asm&token=123
-
-    @GetMapping("/additem")
-    public ResponseEntity<?> add_item(@RequestParam String name,@RequestParam String company) throws SQLException {
-        Item item = new Item();
-        item.setName(name);
-        item.setCompany_id(companyRepository.findByName(company).get());
-        if (itemRepository.findByName(name).isEmpty()){
-            itemRepository.save(item);
-            return new ResponseEntity<>(HttpStatus.OK);}
-        else return  new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-    }
-
-
 }

@@ -16,6 +16,15 @@ public class Company {
 
     private String name;
 
+    @Override
+    public String toString() {
+        return "Company{" +
+                "company_id=" + company_id +
+                ", name='" + name + '\'' +
+                ", items=" + items +
+                '}';
+    }
+
     @OneToMany(mappedBy = "company_id")
     private List<Item> items;
 

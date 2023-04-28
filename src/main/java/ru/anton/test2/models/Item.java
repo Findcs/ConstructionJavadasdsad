@@ -1,5 +1,6 @@
 package ru.anton.test2.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Item {
 
 
     @ManyToOne()
+    @JsonIgnore
     @JoinColumn(name = "company_id")
     private Company company_id;
 

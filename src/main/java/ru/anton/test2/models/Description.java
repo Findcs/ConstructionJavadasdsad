@@ -16,8 +16,8 @@ public class Description {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    private String name_descr;
-    private String descr_value;
+    private String name;
+    private String value;
 
     public int getId() {
         return id;
@@ -43,19 +43,19 @@ public class Description {
         this.user = user;
     }
 
-    public String getName_descr() {
-        return name_descr;
+    public String getName() {
+        return name;
     }
 
-    public void setName_descr(String name_descr) {
-        this.name_descr = name_descr;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescr_value() {
-        return descr_value;
+    public String getValue() {
+        return value;
     }
 
-    public void setDescr_value(String descr_value) {
-        this.descr_value = descr_value;
+    public void setValue(String value) {
+        this.value = value;
     }
 }
