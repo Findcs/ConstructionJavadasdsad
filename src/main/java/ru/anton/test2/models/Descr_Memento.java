@@ -4,22 +4,16 @@ import jakarta.persistence.*;
 
 @Entity
 @Table
-public class Description {
+public class Descr_Memento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
-    @JoinColumn(name = "item_id")
-    private Item item;
-
-    @OneToOne()
     @JoinColumn(name = "memento_id")
-    private Memento memento_id;
+    private Memento memento;
 
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+
     private String name;
     private String value;
 
@@ -31,21 +25,14 @@ public class Description {
         this.id = id;
     }
 
-    public Item getItem() {
-        return item;
+    public Memento getMemento() {
+        return memento;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setMemento(Memento memento) {
+        this.memento = memento;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getName() {
         return name;
