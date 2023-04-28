@@ -13,6 +13,9 @@ public class Memento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int memento_id;
 
+    @OneToOne(mappedBy = "memento_id")
+    @JsonIgnore
+    private Description description;
 
     @OneToMany(mappedBy = "id")
     private List<Descr_Memento> descrMementos;

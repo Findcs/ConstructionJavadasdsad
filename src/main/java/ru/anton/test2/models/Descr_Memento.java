@@ -13,7 +13,6 @@ public class Descr_Memento {
     private Memento memento;
 
 
-
     private String name;
     private String value;
 

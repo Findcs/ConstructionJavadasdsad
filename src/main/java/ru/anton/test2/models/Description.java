@@ -12,11 +12,6 @@ public class Description {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    @OneToOne()
-    @JoinColumn(name = "memento_id")
-    private Memento memento_id;
-
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
