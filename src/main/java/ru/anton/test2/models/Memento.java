@@ -13,10 +13,10 @@ public class Memento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int memento_id;
 
-    @OneToOne(mappedBy = "memento_id")
+    @OneToOne
     @JsonIgnore
     private Description description;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "memento")
     private List<Descr_Memento> descrMementos;
 }
