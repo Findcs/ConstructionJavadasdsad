@@ -13,7 +13,7 @@ public class Memento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int memento_id;
 
-    @OneToOne(mappedBy = "memento_id")
+    @OneToOne
     @JsonIgnore
     private Description description;
 
