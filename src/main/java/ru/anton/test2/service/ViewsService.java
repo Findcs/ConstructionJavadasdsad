@@ -50,7 +50,6 @@ public class ViewsService {
             views_save.setDate(formattedDate);
             views_save.setViews(1);
             viewsRepository.save(views_save);
-            return;
         }
         else{
             Views view_save = views.get();

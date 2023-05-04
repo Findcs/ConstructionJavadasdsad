@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -26,6 +27,8 @@ public class CompanyService {
     public List<Company> getAllCompanys(){
         return companyRepository.findAll();
     }
+
+    public Optional<Company> getCompanyByName(String name){return companyRepository.findByName(name);}
 
     public ResponseEntity<?> add_company(String name) throws SQLException {
         Company company = new Company();
