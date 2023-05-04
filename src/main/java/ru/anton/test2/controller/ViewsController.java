@@ -17,7 +17,6 @@ import ru.anton.test2.repository.CompanyRepository;
 import ru.anton.test2.repository.ItemRepository;
 import ru.anton.test2.repository.UserRepository;
 import ru.anton.test2.service.ItemService;
-import ru.anton.test2.service.ViewsService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,23 +26,10 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
-public class ItemController {
 
+public class ViewsController {
     private ItemService itemService;
-    private ViewsService viewsService;
-    @GetMapping("/additem")
-    public ResponseEntity<?> add_item(@RequestParam String name,@RequestParam String company) throws SQLException {
-        return itemService.add_item(name,company);
-    }
-    //http://localhost:8080/additem?name=model2&company=Xiaomi
-
-    @GetMapping("/all_item")
-    public ResponseEntity<?> all_item()
-    {
-        return new ResponseEntity<>(itemService.all_item(),HttpStatus.OK);
-    }
-
-    @GetMapping("/item/{name}")
+    @GetMapping("/item/{name}/views")
     public ResponseEntity<?> find_item(@PathVariable String name)
     {
         Optional<Item> item = itemService.findItemByName(name);
@@ -51,8 +37,6 @@ public class ItemController {
         {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        viewsService.add_view(name);
-        return new ResponseEntity<>(item.get(),HttpStatus.OK);
+        return new ResponseEntity<>(item.get().getViews(),HttpStatus.OK);
     }
-
 }

@@ -27,6 +27,9 @@ public class Item {
     @OneToMany(mappedBy = "item")
     private List<Description> descriptions;
 
+    @OneToMany(mappedBy = "item")
+    private List<Views> views;
+
     public Item() {
     }
     @Override
