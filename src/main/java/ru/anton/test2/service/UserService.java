@@ -1,10 +1,11 @@
-
-package ru.anton.test2.controller;
+package ru.anton.test2.service;
 
 import lombok.AllArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,32 +14,34 @@ import ru.anton.test2.models.Company;
 import ru.anton.test2.models.Item;
 import ru.anton.test2.models.User;
 import ru.anton.test2.repository.CompanyRepository;
+import ru.anton.test2.repository.DescriptionRepository;
 import ru.anton.test2.repository.ItemRepository;
 import ru.anton.test2.repository.UserRepository;
-import ru.anton.test2.service.UserService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@RestController
+@Service
 @AllArgsConstructor
-public class UserController {
-    UserService userService;
+public class UserService {
+    private UserRepository userRepository;
 
-    @GetMapping("/adduser")
-    public ResponseEntity<?> add_user(@RequestParam String login,@RequestParam String password) throws SQLException {
-        if (userService.add_user(login,password))
-            return new ResponseEntity<>(HttpStatus.OK);
-        else return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-    }
-    //http://localhost:8080/adduser?login=asm&password=asm&token=123
-
-    @GetMapping("/all_users")
-    public ResponseEntity all_users()
+    public List<User> getAllUsers()
     {
-        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+        return  userRepository.findAll();
+    }
+
+    public boolean add_user(String login,String password ) throws SQLException {
+        User user = new User();
+        user.setEmail(login);
+        user.setPassword(password);
+        user.setRole(1);
+        if (userRepository.findByEmail(login).isEmpty()){
+            userRepository.save(user);
+            return true;}
+        else return  false;
     }
 }
-
