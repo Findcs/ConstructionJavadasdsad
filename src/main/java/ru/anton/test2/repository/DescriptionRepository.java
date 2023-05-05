@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface DescriptionRepository extends JpaRepository<Description, Integer> {
     Optional<Description> findById(int id);
     Optional<Description> findByName(String name);
-    @Query("SELECT d FROM Description d WHERE d.name = :name AND d.item.item_id = :itemId")
-    Optional<Description> findByNameAndItem(String name, int itemId);
+    @Query(value = "SELECT d FROM Description d WHERE d.name = :name AND d.item.item_id = :itemId")
+    Optional<Description> findByNameAndItemId(String name, int itemId);
 }

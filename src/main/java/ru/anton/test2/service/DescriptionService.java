@@ -39,7 +39,7 @@ public class DescriptionService {
         Item currentItem = itemOptional.get();
         //Проверка на наличие описания у предмета
         Optional<Description> currentDescription =
-                descriptionRepository.findByName(name);
+                descriptionRepository.findByNameAndItemId(name,currentItem.getItem_id());
         //Если пустое то просто добавлем новое описание
         if (currentDescription.isEmpty()) {
             Description description = new Description();

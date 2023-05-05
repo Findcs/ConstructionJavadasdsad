@@ -1,39 +1,30 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<companys>
-    <company>
-        <id>1</id>
-        <name>Xiaomi</name>
-        <item>
-            <id>1</id>
-            <nameItem>model1</nameItem>
-        </item>
-        <item>
-            <id>2</id>
-            <nameItem>model2</nameItem>
-        </item>
-        <item>
-            <id>3</id>
-            <nameItem>model3</nameItem>
-        </item>
-        <item>
-            <id>4</id>
-            <nameItem>model4</nameItem>
-        </item>
-    </company>
-    <company>
-        <id>2</id>
-        <name>Sumsung</name>
-    </company>
-    <company>
-        <id>3</id>
-        <name>Apple</name>
-    </company>
-    <company>
-        <id>4</id>
-        <name>Xiaomiii</name>
-    </company>
-    <company>
-        <id>5</id>
-        <name>Xiaomii</name>
-    </company>
+<?xml version="1.0" encoding="UTF-8"?><companys>
+<company>
+<id>1</id>
+<name>Xiaomi</name>
+<item>
+<id>1</id>
+<nameItem>module</nameItem>
+</item>
+</company>
+<company>
+<id>2</id>
+<name>Apple</name>
+<item>
+<id>2</id>
+<nameItem>Iphone 5</nameItem>
+</item>
+<item>
+<id>3</id>
+<nameItem>Iphone 6</nameItem>
+</item>
+<item>
+<id>4</id>
+<nameItem>Iphone 7</nameItem>
+</item>
+<item>
+<id>5</id>
+<nameItem>Iphone 8</nameItem>
+</item>
+</company>
 </companys>
