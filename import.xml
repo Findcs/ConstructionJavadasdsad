@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<company>
+    <id>1</id>
+    <name>Apple</name>
+    <item>
+        <id>1</id>
+        <nameItem>Iphone 5</nameItem>
+    </item>
+    <item>
+        <id>2</id>
+        <nameItem>Iphone 6</nameItem>
+    </item>
+    <item>
+        <id>3</id>
+        <nameItem>Iphone 7</nameItem>
+    </item>
+    <item>
+        <id>4</id>
+        <nameItem>Iphone 8</nameItem>
+    </item>
+</company>
