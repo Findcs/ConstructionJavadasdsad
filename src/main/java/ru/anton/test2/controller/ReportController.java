@@ -49,4 +49,10 @@ public class ReportController {
         reportService.writeToXML_all_comp(companys);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @GetMapping("/report/importcomps")
+    public ResponseEntity<?> importOneComp()  {
+        reportService.importXML("import.xml");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import ru.anton.test2.facade.SQL;
 import ru.anton.test2.models.Company;
 import ru.anton.test2.models.Item;
@@ -35,6 +36,8 @@ public class ReportService {
 
     private CompanyRepository companyRepository;
     private ItemRepository itemRepository;
+
+    private ItemService itemService;
 
     public void writeToXML_comp(Company company){
         try{
@@ -142,5 +145,54 @@ public class ReportService {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private String getElementTextContent(Element element, String tagName) {
+        NodeList nodeList = element.getElementsByTagName(tagName);
+        Element tagElement = (Element) nodeList.item(0);
+        return tagElement.getTextContent();
+    }
+
+    public Company importXML(String fileName){
+        try {
+            // Создание объекта DocumentBuilderFactory и DocumentBuilder
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            // Чтение XML-файла и создание объекта Document
+            Document document = builder.parse(new File(fileName));
+            // Получение корневого элемента
+            Element rootElement = document.getDocumentElement();
+            // Получение элементов для полей объекта Company
+            String name = getElementTextContent(rootElement, "name");
+            int comp_id = Integer.parseInt(getElementTextContent(rootElement, "id"));
+            // Получение элементов для списка объектов Item
+            NodeList itemList = rootElement.getElementsByTagName("item");
+            List<Item> items = new ArrayList<>();
+            for (int i = 0; i < itemList.getLength(); i++) {
+                Element itemElement = (Element) itemList.item(i);
+                int item_id = Integer.parseInt(getElementTextContent(itemElement, "id"));
+                String nameItem = getElementTextContent(itemElement, "nameItem");
+                Item item = new Item();
+                item.setItem_id(item_id);
+                item.setName(nameItem);
+                items.add(item);
+            }
+            Company company = new Company();
+            company.setName(name);
+            company.setItems(items);
+            System.out.println(company);
+            Optional<Company> company_bd = companyRepository.findByName(name);
+            if (company_bd.isEmpty())
+                companyRepository.save(company);
+            for (Item item: items){
+                itemService.add_item(item.getName(),name);
+            }
+            return company;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
