@@ -18,6 +18,7 @@ import ru.anton.test2.repository.ItemRepository;
 import ru.anton.test2.repository.UserRepository;
 import ru.anton.test2.service.CompanyService;
 import ru.anton.test2.service.ItemService;
+import ru.anton.test2.service.ReportService;
 import ru.anton.test2.service.ViewsService;
 
 
@@ -31,9 +32,21 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ReportController {
     CompanyService companyService;
-    @GetMapping("/report")
-    public ResponseEntity<?> report()  {
-
+    ReportService reportService;
+    @GetMapping("/report/comp/{name}")
+    public ResponseEntity<?> report(@PathVariable String name)  {
+        Optional<Company> company = companyService.getCompanyByName(name);
+        if(company.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        reportService.writeToXML_comp(company.get());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("/report/comps")
+    public ResponseEntity<?> report_all_comps()  {
+        List <Company> companys = companyService.getAllCompanys();
+        if(companys.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        reportService.writeToXML_all_comp(companys);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

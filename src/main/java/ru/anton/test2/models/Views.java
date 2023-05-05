@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -24,5 +25,5 @@ public class Views {
 
     private int views;
 
-    private String date;
+    private LocalDate date;
 }

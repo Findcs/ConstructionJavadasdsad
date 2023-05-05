@@ -39,15 +39,17 @@ public class ViewsService {
 
     public void add_view(String name){
         Item item = itemRepository.findByName(name).get();
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String formattedDate = date.format(formatter);
-        Optional<Views> views = viewsRepository.findByDate(formattedDate);
+        LocalDate currentDate = LocalDate.now();
+        int day = currentDate.getDayOfMonth();
+        int month = currentDate.getMonthValue();
+        int year = currentDate.getYear();
+        LocalDate date = LocalDate.of(year, month, day);
+        Optional<Views> views = viewsRepository.findByDate(date);
         if (views.isEmpty())
         {
             Views views_save = new Views();
             views_save.setItem(item);
-            views_save.setDate(formattedDate);
+            views_save.setDate(date);
             views_save.setViews(1);
             viewsRepository.save(views_save);
         }
