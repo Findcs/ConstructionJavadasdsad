@@ -9,14 +9,18 @@ import ru.anton.test2.facade.SQL;
 import ru.anton.test2.models.Company;
 import ru.anton.test2.models.Item;
 import ru.anton.test2.models.User;
+import ru.anton.test2.models.Views;
 import ru.anton.test2.repository.CompanyRepository;
 import ru.anton.test2.repository.DescriptionRepository;
 import ru.anton.test2.repository.ItemRepository;
 import ru.anton.test2.repository.UserRepository;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +33,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 @Service
 @AllArgsConstructor
@@ -193,6 +203,50 @@ public class ReportService {
         catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void createExcel(List<Views> views, LocalDate date){
+        // Создание нового документа Excel
+        Workbook workbook = new XSSFWorkbook();
+
+        // Создание нового листа и добавление его в документ
+        Sheet sheet = workbook.createSheet("Views");
+
+        // Создание заголовков столбцов
+        Row headerRow = sheet.createRow(0);
+        Cell dayHeaderCell = headerRow.createCell(0);
+        dayHeaderCell.setCellValue("Дата");
+
+        Cell itemHeaderCell = headerRow.createCell(1);
+        itemHeaderCell.setCellValue("Айтем");
+
+        Cell viewsHeaderCell = headerRow.createCell(2);
+        viewsHeaderCell.setCellValue("Количество просмотров");
+        int rowNum = 1;
+        for (Views viewsObj : views) {
+            if(viewsObj.getDate().compareTo(date) >= 0) {
+                Row row = sheet.createRow(rowNum++);
+                // Заполнение ячейки "Дата"
+                Cell dayCell = row.createCell(0);
+                dayCell.setCellValue(viewsObj.getDate().toString());
+
+                // Заполнение ячейки "Айтем"
+                Cell itemCell = row.createCell(1);
+                itemCell.setCellValue(viewsObj.getItem().getName());
+
+                // Заполнение ячейки "Количество просмотров"
+                Cell viewsCell = row.createCell(2);
+                viewsCell.setCellValue(viewsObj.getViews());
+            }
+        }
+
+        try (FileOutputStream outputStream = new FileOutputStream("table.xls")) {
+            workbook.write(outputStream);
+            System.out.println("Таблица Excel успешно создана!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -13,9 +13,11 @@ import ru.anton.test2.facade.SQL;
 import ru.anton.test2.models.Company;
 import ru.anton.test2.models.Item;
 import ru.anton.test2.models.User;
+import ru.anton.test2.models.Views;
 import ru.anton.test2.repository.CompanyRepository;
 import ru.anton.test2.repository.ItemRepository;
 import ru.anton.test2.repository.UserRepository;
+import ru.anton.test2.repository.ViewsRepository;
 import ru.anton.test2.service.CompanyService;
 import ru.anton.test2.service.ItemService;
 import ru.anton.test2.service.ReportService;
@@ -25,14 +27,17 @@ import ru.anton.test2.service.ViewsService;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 @RestController
 @AllArgsConstructor
 public class ReportController {
     CompanyService companyService;
     ReportService reportService;
+    ItemService itemService;
     @GetMapping("/report/comp/{name}")
     public ResponseEntity<?> report(@PathVariable String name)  {
         Optional<Company> company = companyService.getCompanyByName(name);
@@ -54,5 +59,16 @@ public class ReportController {
         reportService.importXML("import.xml");
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/report/views/{name}")
+    public ResponseEntity<?> views(@PathVariable String name, @RequestParam int day, @RequestParam int month ,@RequestParam int year )  {
+        LocalDate date = LocalDate.of(year,month,day);
+        Optional<Item> item = itemService.findItemByName(name);
+        if(item.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        reportService.createExcel(item.get().getViews(), date);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    //http://localhost:8080/report/views/model1?day=25&month=4&year=2023
 
 }
