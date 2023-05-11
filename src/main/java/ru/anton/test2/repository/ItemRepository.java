@@ -11,4 +11,5 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
     Optional<Item> findById(int item_id);
     Optional<Item> findByName(String name);
 
+
 }
