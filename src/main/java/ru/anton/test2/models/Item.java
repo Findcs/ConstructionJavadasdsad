@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "items")
@@ -27,20 +28,12 @@ public class Item {
     @JoinColumn(name = "company_id")
     private Company company_id;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item", fetch = FetchType.EAGER)
     private List<Description> descriptions;
 
     @OneToMany(mappedBy = "item")
     private List<Views> views;
 
     public Item() {
-    }
-    @Override
-    public String toString() {
-        return "Item{" +
-                "name='" + name + '\'' +
-                ", id=" + item_id +
-                ", descriptions=" + descriptions +
-                '}';
     }
 }

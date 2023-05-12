@@ -25,11 +25,4 @@ public class Memento {
                 fetch = FetchType.LAZY)
     private List<DescriptionMemento> descrMementos = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "Memento{" +
-                "memento_id=" + memento_id +
-                ", descrMementos=" + descrMementos +
-                '}';
-    }
 }

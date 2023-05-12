@@ -10,7 +10,6 @@ import lombok.ToString;
 @Table
 @Getter
 @Setter
-@ToString
 public class DescriptionMemento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

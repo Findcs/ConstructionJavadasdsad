@@ -33,7 +33,7 @@ public class DescriptionService {
     private ItemRepository itemRepository;
     private MementoRepository mementoRepository;
 
-    public ResponseEntity<?> add_descr( String item, String name, String value) throws SQLException {
+    public ResponseEntity<?> add_descr(String item, String name, String value) throws SQLException {
         Optional<Item> itemOptional = itemRepository.findByName(item);
 
         if (itemOptional.isEmpty()) {

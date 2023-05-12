@@ -39,8 +39,6 @@ class CompanyRepositoryTest {
     ViewsRepository viewsRepository;
 
 
-
-
     @BeforeEach
     public void clearDatabase() {
         descriptionMementoRepository.deleteAll();

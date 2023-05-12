@@ -30,14 +30,4 @@ public class Description {
 
     @OneToOne
     private Memento memento;
-
-    @Override
-    public String toString() {
-        return "Description{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", value='" + value + '\'' +
-                ", memento=" + memento +
-                '}';
-    }
 }
