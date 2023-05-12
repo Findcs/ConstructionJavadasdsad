@@ -15,5 +15,7 @@ import java.util.Optional;
 public interface ViewsRepository extends JpaRepository<Views, Integer> {
     Optional<Views> findByDate(LocalDate date);
 
+    Optional<Views> findByDateAndItem(LocalDate date, Item item);
+
 
 }

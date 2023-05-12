@@ -44,7 +44,7 @@ public class ViewsService {
         int month = currentDate.getMonthValue();
         int year = currentDate.getYear();
         LocalDate date = LocalDate.of(year, month, day);
-        Optional<Views> views = viewsRepository.findByDate(date);
+        Optional<Views> views = viewsRepository.findByDateAndItem(date,item);
         if (views.isEmpty())
         {
             Views views_save = new Views();

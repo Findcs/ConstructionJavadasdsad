@@ -1,6 +1,8 @@
 
 package ru.anton.test2.service;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +24,8 @@ import java.util.Optional;
 import org.springframework.web.bind.annotation.RestController;
 @Service
 @AllArgsConstructor
-
+@Getter
+@Setter
 public class DescriptionService {
     private DescriptionRepository descriptionRepository;
 
