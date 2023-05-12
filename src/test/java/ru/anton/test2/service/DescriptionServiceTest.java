@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.anton.test2.models.Description;
 import ru.anton.test2.models.Item;
 import ru.anton.test2.repository.*;
@@ -25,20 +26,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(MockitoJUnitRunner.class)
 
 class DescriptionServiceTest {
-    @InjectMocks
-    private DescriptionService descriptionService;
-    private AutoCloseable closeable;
-    @Mock
-    private DescriptionRepository descriptionRepository;
+   @Autowired
+   DescriptionService descriptionService;
 
-    @BeforeEach
-    void setup() {
-        closeable = MockitoAnnotations.openMocks(this);
-    }
-    @AfterEach
-    void closeService() throws Exception {
-        closeable.close();
-    }
+   @MockBean
+   DescriptionRepository descriptionRepository;
+
+
 
     @Test
     void add_descr() throws SQLException {
