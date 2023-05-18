@@ -21,9 +21,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -206,7 +204,7 @@ public class ReportService {
         }
     }
 
-    public void createExcel(List<Views> views, LocalDate date){
+    public void createExcelFromDate(List<Views> views, LocalDate date){
         // Создание нового документа Excel
         Workbook workbook = new XSSFWorkbook();
 
@@ -240,13 +238,63 @@ public class ReportService {
                 viewsCell.setCellValue(viewsObj.getViews());
             }
         }
-
-        try (FileOutputStream outputStream = new FileOutputStream("table.xls")) {
+        try (FileOutputStream outputStream = new FileOutputStream(views.get(0).getItem().getName()+"from"+date.toString()+".xls", false)) {
             workbook.write(outputStream);
             System.out.println("Таблица Excel успешно создана!");
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean createExcelFromDateFromHigh(List<Views> views, LocalDate date, int filtr){
+        // Создание нового документа Excel
+        Workbook workbook = new XSSFWorkbook();
+
+        // Создание нового листа и добавление его в документ
+        Sheet sheet = workbook.createSheet("Views");
+
+        // Создание заголовков столбцов
+        Row headerRow = sheet.createRow(0);
+        Cell dayHeaderCell = headerRow.createCell(0);
+        dayHeaderCell.setCellValue("Дата");
+
+        Cell itemHeaderCell = headerRow.createCell(1);
+        itemHeaderCell.setCellValue("Айтем");
+
+        Cell viewsHeaderCell = headerRow.createCell(2);
+        viewsHeaderCell.setCellValue("Количество просмотров");
+        Collections.sort(views, new Comparator<Views>() {
+            @Override
+            public int compare(Views v1, Views v2) {
+                return Integer.compare(v2.getViews(), v1.getViews());
+            }
+        });
+        int rowNum = 1;
+        for (Views viewsObj : views) {
+            if(viewsObj.getDate().compareTo(date) >= 0 && viewsObj.getViews()>filtr) {
+                Row row = sheet.createRow(rowNum++);
+                // Заполнение ячейки "Дата"
+                Cell dayCell = row.createCell(0);
+                dayCell.setCellValue(viewsObj.getDate().toString());
+
+                // Заполнение ячейки "Айтем"
+                Cell itemCell = row.createCell(1);
+                itemCell.setCellValue(viewsObj.getItem().getName());
+
+                // Заполнение ячейки "Количество просмотров"
+                Cell viewsCell = row.createCell(2);
+                viewsCell.setCellValue(viewsObj.getViews());
+            }
+        }
+        try (FileOutputStream outputStream = new FileOutputStream("All items from"+date.toString()+".xls", false)) {
+            workbook.write(outputStream);
+            System.out.println("Таблица Excel успешно создана!");
+            return true;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

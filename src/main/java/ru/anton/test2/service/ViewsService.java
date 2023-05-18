@@ -36,7 +36,9 @@ public class ViewsService {
     private ItemRepository itemRepository;
 
     private ViewsRepository viewsRepository;
-
+    public List<Views> allViews(){
+        return viewsRepository.findAll();
+    }
     public void add_view(String name){
         Item item = itemRepository.findByName(name).get();
         LocalDate currentDate = LocalDate.now();

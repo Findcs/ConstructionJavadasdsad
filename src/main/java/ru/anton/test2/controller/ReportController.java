@@ -38,6 +38,7 @@ public class ReportController {
     CompanyService companyService;
     ReportService reportService;
     ItemService itemService;
+    ViewsService viewsService;
     @GetMapping("/report/comp/{name}")
     public ResponseEntity<?> report(@PathVariable String name)  {
         Optional<Company> company = companyService.getCompanyByName(name);
@@ -66,9 +67,16 @@ public class ReportController {
         Optional<Item> item = itemService.findItemByName(name);
         if(item.isEmpty())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        reportService.createExcel(item.get().getViews(), date);
+        reportService.createExcelFromDate(item.get().getViews(), date);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     //http://localhost:8080/report/views/model1?day=25&month=4&year=2023
+
+    @GetMapping("/report/viewshigh")
+    public ResponseEntity<?> allviews(@RequestParam int day, @RequestParam int month ,@RequestParam int year, @RequestParam int filtr )  {
+        LocalDate date = LocalDate.of(year,month,day);
+        reportService.createExcelFromDateFromHigh(viewsService.allViews(), date, filtr);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
