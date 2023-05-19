@@ -33,7 +33,11 @@ public class ItemController {
     private ViewsService viewsService;
     @GetMapping("/additem")
     public ResponseEntity<?> add_item(@RequestParam String name,@RequestParam String company) throws SQLException {
-        return itemService.add_item(name,company);
+        Item item = itemService.add_item(name,company);
+        if (item !=null)
+            return new ResponseEntity<>(item, HttpStatus.OK);
+        else
+            return  new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
     //http://localhost:8080/additem?name=model2&company=Xiaomi
 

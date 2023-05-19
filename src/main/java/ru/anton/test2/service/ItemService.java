@@ -30,17 +30,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class ItemService {
     private ItemRepository itemRepository;
     private CompanyRepository companyRepository;
-    public ResponseEntity<?> add_item(String name,String company_name) throws SQLException {
+    public Item add_item(String name,String company_name) throws SQLException {
         Item item = new Item();
         item.setName(name);
         Optional<Company> company = companyRepository.findByName(company_name);
         if (company.isEmpty())
-        {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
+        {return null;}
         item.setCompany_id(company.get());
         if (itemRepository.findByName(name).isEmpty()){
             itemRepository.save(item);
-            return new ResponseEntity<>(HttpStatus.OK);}
-        else return  new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            return item;}
+        else return  null;
     }
 
     public List<Item>all_item()
