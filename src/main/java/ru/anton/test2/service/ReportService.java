@@ -5,25 +5,17 @@ import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import ru.anton.test2.facade.SQL;
 import ru.anton.test2.models.Company;
 import ru.anton.test2.models.Item;
-import ru.anton.test2.models.User;
 import ru.anton.test2.models.Views;
 import ru.anton.test2.repository.CompanyRepository;
-import ru.anton.test2.repository.DescriptionRepository;
 import ru.anton.test2.repository.ItemRepository;
-import ru.anton.test2.repository.UserRepository;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
-
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

@@ -1,6 +1,8 @@
 package ru.anton.test2.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,8 @@ public class Company {
     private String name;
 
 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "company_id")
     private List<Item> items;
 

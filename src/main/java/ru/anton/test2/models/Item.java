@@ -24,7 +24,7 @@ public class Item {
     private String name;
 
     @ManyToOne()
-    @JsonIgnore
+    //@JsonIgnore
     @JoinColumn(name = "company_id")
     private Company company_id;
 
