@@ -34,14 +34,14 @@ public class UserService {
         return  userRepository.findAll();
     }
 
-    public boolean add_user(String login,String password ) throws SQLException {
+    public User add_user(String login,String password ) throws SQLException {
         User user = new User();
         user.setEmail(login);
         user.setPassword(password);
         user.setRole(1);
         if (userRepository.findByEmail(login).isEmpty()){
             userRepository.save(user);
-            return true;}
-        else return  false;
+            return user;}
+        else return  null;
     }
 }

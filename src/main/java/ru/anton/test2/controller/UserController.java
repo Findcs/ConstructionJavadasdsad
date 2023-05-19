@@ -29,8 +29,9 @@ public class UserController {
 
     @GetMapping("/adduser")
     public ResponseEntity<?> add_user(@RequestParam String login,@RequestParam String password) throws SQLException {
-        if (userService.add_user(login,password))
-            return new ResponseEntity<>(HttpStatus.OK);
+        User user = userService.add_user(login,password);
+        if (user != null)
+            return new ResponseEntity<>(user,HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
     //http://localhost:8080/adduser?login=asm&password=asm&token=123
