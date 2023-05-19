@@ -29,7 +29,11 @@ public class CompanyController {
 
     @GetMapping("/addcomp")
     public ResponseEntity<?> add_company(@RequestParam String name) throws SQLException {
-        return companyService.add_company(name);
+        if(companyService.add_company(name)==null)
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        else {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 
     @GetMapping("/all_comp")

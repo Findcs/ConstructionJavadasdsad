@@ -30,12 +30,16 @@ public class CompanyService {
 
     public Optional<Company> getCompanyByName(String name){return companyRepository.findByName(name);}
 
-    public ResponseEntity<?> add_company(String name) throws SQLException {
+    public Company add_company(String name) throws SQLException {
         Company company = new Company();
         company.setName(name);
         if (companyRepository.findByName(name).isEmpty()) {
             companyRepository.save(company);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            return company;
+
+        }
+        else return null;
     }
+
+
 }
