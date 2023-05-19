@@ -26,7 +26,10 @@ public class DescriptionController {
     public ResponseEntity<?> add_descr(@RequestParam String item,
                                        @RequestParam String name,
                                        @RequestParam String value) throws SQLException {
-        return descriptionService.add_descr(item, name, value);
+        Description description = descriptionService.add_descr(item, name, value);
+        if( description != null)
+            return  new ResponseEntity<>(description,HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
 

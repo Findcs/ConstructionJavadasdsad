@@ -33,11 +33,11 @@ public class DescriptionService {
     private ItemRepository itemRepository;
     private MementoRepository mementoRepository;
 
-    public ResponseEntity<?> add_descr(String item, String name, String value) throws SQLException {
+    public Description add_descr(String item, String name, String value) throws SQLException {
         Optional<Item> itemOptional = itemRepository.findByName(item);
 
         if (itemOptional.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return null;
         }
         Item currentItem = itemOptional.get();
         //Проверка на наличие описания у предмета
@@ -50,7 +50,7 @@ public class DescriptionService {
             description.setValue(value);
             description.setItem(currentItem);
             descriptionRepository.save(description);
-            return new ResponseEntity<>(description, HttpStatus.OK);
+            return description;
         } else {
             Description description = currentDescription.get();
 
@@ -80,7 +80,7 @@ public class DescriptionService {
             descriptionMementoRepository.save(descrMemento);
             descriptionRepository.save(description);
 
-            return new ResponseEntity<>(description, HttpStatus.OK);
+            return description;
         }
     }
     public boolean changeVersion( String item, String name, int id) throws SQLException {
