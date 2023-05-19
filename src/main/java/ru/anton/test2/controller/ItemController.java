@@ -36,7 +36,7 @@ public class ItemController {
     //http://localhost:8080/additem?name=model2&company=Xiaomi
 
     @GetMapping("/all_item")
-    public ResponseEntity<?> all_item(@RequestParam(value = "filter", required = false) String filter)
+    public ResponseEntity<List<Item>> all_item(@RequestParam(value = "filter", required = false) String filter)
     {
         SortParam sortParam = null;
         if (filter == null) {
